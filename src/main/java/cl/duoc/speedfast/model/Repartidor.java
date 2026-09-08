@@ -1,10 +1,20 @@
 package cl.duoc.speedfast.model;
 
+import cl.duoc.speedfast.service.ZonaDeCarga;
+
 // Implementa Runnable
 public class Repartidor {
+    private String nombreRepartidor;
+    private ZonaDeCarga zonaDeCarga;
 
-    // String nombre
-    // zonaDeCarga (variable de ZonaDeCarga)
+    public Repartidor(String nombreRepartidor, ZonaDeCarga zonaDeCarga) {
+        this.nombreRepartidor = nombreRepartidor;
+        this.zonaDeCarga = zonaDeCarga;
+    }
+
+    /*
+        getters o setters?
+     */
 
     /*
     @Override

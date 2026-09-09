@@ -5,10 +5,10 @@ public class Pedido {
     private String direccionEntrega;
     private EstadoPedido estadoPedido;
 
-    public Pedido(int idPedido, String direccionEntrega, EstadoPedido estadoPedido) {
+    public Pedido(int idPedido, String direccionEntrega) {
         this.idPedido = idPedido;
         this.direccionEntrega = direccionEntrega;
-        this.estadoPedido = estadoPedido;
+        this.estadoPedido = EstadoPedido.PENDIENTE;
     }
 
     public int getIdPedido() {
@@ -19,16 +19,8 @@ public class Pedido {
         return direccionEntrega;
     }
 
-    /*
-        getEstadoPedido?
-     */
-
     public EstadoPedido getEstadoPedido() {
         return estadoPedido;
-    }
-
-    public void setIdPedido(int idPedido) {
-        this.idPedido = idPedido;
     }
 
     public void setDireccionEntrega(String direccionEntrega) {
@@ -44,14 +36,4 @@ public class Pedido {
         return "ID Pedido: #" + idPedido + " | Dirección de Entrega: " + direccionEntrega +
                 " | Estado Pedido: " + estadoPedido;
     }
-
-    /*
-    setEstado(String nuevoEstado)
-     */
-
-    public void setEstado(String nuevoEstado) {
-        System.out.println("\"Actualizar el nuevo estado.\"");
-    }
-
-
 }

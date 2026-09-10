@@ -1,6 +1,7 @@
-package cl.duoc.speedfast.model;
+package cl.duoc.speedfast.service;
 
-import cl.duoc.speedfast.service.ZonaDeCarga;
+import cl.duoc.speedfast.model.EstadoPedido;
+import cl.duoc.speedfast.model.Pedido;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;

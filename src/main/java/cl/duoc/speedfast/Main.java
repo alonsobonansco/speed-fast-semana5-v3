@@ -1,7 +1,7 @@
 package cl.duoc.speedfast;
 
 import cl.duoc.speedfast.model.Pedido;
-import cl.duoc.speedfast.model.Repartidor;
+import cl.duoc.speedfast.service.Repartidor;
 import cl.duoc.speedfast.service.ZonaDeCarga;
 
 import java.util.List;

@@ -59,24 +59,24 @@ public class Repartidor implements Runnable {
             }
 
             try {
-                TimeUnit.MILLISECONDS.sleep(calcularTiempoAleatorio(1000, 1000));
+                Thread.sleep(calcularTiempoAleatorio(1000, 1000));
 
                 System.out.println(
                         "Retirando pedido #" + pedido.getIdPedido() + "... [Repartidor " + nombreRepartidor + "]"
                 );
 
-                TimeUnit.MILLISECONDS.sleep(calcularTiempoAleatorio(1000, 1500));
+                Thread.sleep(calcularTiempoAleatorio(1000, 1500));
 
                 pedido.setEstadoPedido(EstadoPedido.EN_REPARTO);
                 System.out.println(
                         "Estado pedido #" + pedido.getIdPedido() + ": " + pedido.getEstadoPedido()
                 );
 
-                TimeUnit.MILLISECONDS.sleep(calcularTiempoAleatorio(1500, 1000));
+                Thread.sleep(calcularTiempoAleatorio(1500, 1000));
 
                 System.out.println("Entregando pedido #" + pedido.getIdPedido() + "...");
 
-                TimeUnit.MILLISECONDS.sleep(calcularTiempoAleatorio(500, 500));
+                Thread.sleep(calcularTiempoAleatorio(500, 500));
 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();

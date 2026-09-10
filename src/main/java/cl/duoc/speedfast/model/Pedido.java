@@ -2,11 +2,22 @@ package cl.duoc.speedfast.model;
 
 import java.util.Objects;
 
+/**
+ * Representa un pedido dentro del sistema de distribución SpeedFast.
+ */
 public class Pedido {
     private final int idPedido;
     private String direccionEntrega;
     private EstadoPedido estadoPedido;
 
+    /**
+     * Construye una nueva instancia de un Pedido con un estado inicial PENDIENTE.
+     * Aplica programación defensiva para asegurar que el ID sea válido antes de inicializar.
+     *
+     * @param idPedido         El identificador numérico único del pedido.
+     * @param direccionEntrega La ubicación física de destino.
+     * @throws IllegalArgumentException Si el idPedido es menor o igual a cero, o si la dirección es inválida.
+     */
     public Pedido(int idPedido, String direccionEntrega) {
         if (idPedido <= 0) {
             throw new IllegalArgumentException("El ID del pedido debe ser válido.");
@@ -37,6 +48,13 @@ public class Pedido {
         this.direccionEntrega = direccionEntrega;
     }
 
+    /**
+     * Actualiza el estado logístico del pedido de forma segura.
+     * Utiliza seguridad contra nulos para evitar la corrupción del estado del objeto.
+     *
+     * @param estadoPedido El nuevo estado enumerado a asignar.
+     * @throws NullPointerException Si el estado proporcionado es nulo.
+     */
     public void setEstadoPedido(EstadoPedido estadoPedido) {
         this.estadoPedido = Objects.requireNonNull(
                 estadoPedido,

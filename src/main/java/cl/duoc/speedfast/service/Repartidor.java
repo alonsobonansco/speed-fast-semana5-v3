@@ -6,10 +6,28 @@ import cl.duoc.speedfast.model.Pedido;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Representa un hilo de trabajo (Worker Thread) encargado del procesamiento logístico de los pedidos.
+ * Implementa la interfaz {@link Runnable} para permitir su ejecución en hilos independientes y paralelos.
+ * <p>
+ * Los objetos de esta clase interactúan de manera competitiva sobre un recurso compartido común,
+ * extrayendo tareas de forma segura para mitigar condiciones de carrera y dobles asignaciones.
+ *
+ * @see Runnable
+ * @see ZonaDeCarga
+ */
 public class Repartidor implements Runnable {
     private final String nombreRepartidor;
     private final ZonaDeCarga zonaDeCarga;
 
+    /**
+     * Construye una nueva instancia de Repartidor aplicando programación defensiva (Fail-Fast).
+     * Garantiza que el hilo no inicie su ejecución con dependencias corruptas o nulas.
+     *
+     * @param nombreRepartidor El nombre del transportista.
+     * @param zonaDeCarga      Instancia del recurso compartido thread-safe.
+     * @throws IllegalArgumentException Si el nombre es inválido o si la zona de carga es nula.
+     */
     public Repartidor(String nombreRepartidor, ZonaDeCarga zonaDeCarga) {
         if (nombreRepartidor == null || nombreRepartidor.isBlank()) {
             throw new IllegalArgumentException("El nombre del repartidor no puede estar vacío.");
@@ -23,6 +41,14 @@ public class Repartidor implements Runnable {
         this.zonaDeCarga = zonaDeCarga;
     }
 
+    /**
+     * Ciclo de vida principal del hilo trabajador.
+     * Ejecuta un bucle infinito que consume de forma continua los pedidos de la {@link ZonaDeCarga}.
+     * <p>
+     * Cada iteración simula un flujo logístico real dividido en fases (Carga, Transporte, Entrega)
+     * utilizando pausas dinámicas. El bucle se rompe de forma limpia cuando la cola común se vacía
+     * o si el hilo recibe una señal de interrupción externa.
+     */
     @Override
     public void run() {
         while (true) {
@@ -66,6 +92,15 @@ public class Repartidor implements Runnable {
         }
     }
 
+    /**
+     * Método auxiliar privado encargado de calcular tiempos dinámicos de simulación.
+     * Utiliza {@link ThreadLocalRandom} para entornos multihilo, minimizando la contención
+     * entre hilos en comparación con un generador global de números aleatorios.
+     *
+     * @param baseMilisegundos Cantidad mínima de tiempo fijo que durará la pausa.
+     * @param rangoAleatorio   Límite superior del rango variable que se sumará a la base.
+     * @return El tiempo total calculado en milisegundos listo para ser consumido por un sleep.
+     */
     private int calcularTiempoAleatorio(int baseMilisegundos, int rangoAleatorio) {
         return baseMilisegundos + ThreadLocalRandom.current().nextInt(rangoAleatorio);
     }

@@ -1,13 +1,19 @@
 package cl.duoc.speedfast.model;
 
+import java.util.Objects;
+
 public class Pedido {
-    private int idPedido;
+    private final int idPedido;
     private String direccionEntrega;
     private EstadoPedido estadoPedido;
 
     public Pedido(int idPedido, String direccionEntrega) {
+        if (idPedido <= 0) {
+            throw new IllegalArgumentException("El ID del pedido debe ser válido.");
+        }
+
         this.idPedido = idPedido;
-        this.direccionEntrega = direccionEntrega;
+        setDireccionEntrega(direccionEntrega);
         this.estadoPedido = EstadoPedido.PENDIENTE;
     }
 
@@ -24,11 +30,18 @@ public class Pedido {
     }
 
     public void setDireccionEntrega(String direccionEntrega) {
+        if (direccionEntrega == null || direccionEntrega.isBlank()) {
+            throw new IllegalArgumentException("La dirección debe ser válida.");
+        }
+
         this.direccionEntrega = direccionEntrega;
     }
 
     public void setEstadoPedido(EstadoPedido estadoPedido) {
-        this.estadoPedido = estadoPedido;
+        this.estadoPedido = Objects.requireNonNull(
+                estadoPedido,
+                "El estado del pedido no puede ser nulo."
+        );
     }
 
     @Override

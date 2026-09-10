@@ -10,6 +10,14 @@ public class Repartidor implements Runnable {
     private final ZonaDeCarga zonaDeCarga;
 
     public Repartidor(String nombreRepartidor, ZonaDeCarga zonaDeCarga) {
+        if (nombreRepartidor == null || nombreRepartidor.isBlank()) {
+            throw new IllegalArgumentException("El nombre del repartidor no puede estar vacío.");
+        }
+
+        if (zonaDeCarga == null) {
+            throw new IllegalArgumentException("El repartidor debe tener asignada una zona de carga válida.");
+        }
+
         this.nombreRepartidor = nombreRepartidor;
         this.zonaDeCarga = zonaDeCarga;
     }

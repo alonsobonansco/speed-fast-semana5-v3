@@ -9,7 +9,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
+        Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
+            System.err.println("Ha ocurrido un problema interno durante el proceso.");
+            System.err.println("Motivo: " + throwable.getMessage());
+
+            System.exit(1);
+        });
+
         ZonaDeCarga zonaDeCarga = new ZonaDeCarga();
         System.out.println("[Zona de carga inicializada]");
         System.out.println();

@@ -40,7 +40,12 @@ public class Main {
         }
 
         System.out.println();
-        System.out.println("[Zona de carga vacía]");
-        System.out.println("Todos los pedidos han sido entregados correctamente");
+
+        if (zonaDeCarga.estaVacia()) {
+            System.out.println("[Zona de carga vacía]");
+            System.out.println("Todos los pedidos han sido entregados correctamente");
+        } else {
+            System.out.println("Proceso terminado con pedidos pendientes.");
+        }
     }
 }

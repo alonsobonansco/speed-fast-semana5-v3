@@ -23,4 +23,8 @@ public class ZonaDeCarga {
     public Pedido retirarPedido() {
         return pedidosPendientes.poll();
     }
+
+    public boolean estaVacia() {
+        return pedidosPendientes.isEmpty();
+    }
 }
